@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="MediaElement.MainPage">
+
+    <StackLayout>
+        <Label Text="Welcome to Xamarin Free Music Archive.org/" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+        <Image Source="Logo.png"></Image>
+        <ListView x:Name="lvBrani" ItemsSource="{Binding}" ItemSelected="lvBrani_ItemSelected" ItemTapped="lvBrani_ItemTapped" >
+            <ListView.ItemTemplate >
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Margin="5">
+                            <ffimageloading:CachedImage 
+                                HorizontalOptions="Center" VerticalOptions="Center"
+			                    WidthRequest="100" HeightRequest="100"
+			                    DownsampleToViewSize="true"
+			                    Source = "{Binding Immagine}">
+                                <ffimageloading:CachedImage.Transformations>
+                                    <fftransformations:CircleTransformation/>
+                                </ffimageloading:CachedImage.Transformations>
+                            </ffimageloading:CachedImage>
+                            <StackLayout>
+                                <Label Text="{Binding Autore}"  FontAttributes="Bold" FontSize="Medium"></Label>
+                                <Label Text="{Binding Titolo}" FontAttributes="Italic"></Label>
+                            </StackLayout>
+                            <Image></Image>
+                        </StackLayout>
+                    </ViewCell>
+                  
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <WebView Source="https://freemusicarchive.org/static" HeightRequest="300"></WebView>
+        <MediaElement x:Name="media" BackgroundColor="Accent" />
+    </StackLayout>
+
+</ContentPage>
